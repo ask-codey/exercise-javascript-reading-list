@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Reading List</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <h1>My Reading List</h1>
+
+    <section aria-labelledby="add-heading">
+      <h2 id="add-heading">Add a book</h2>
+      <form id="add-book" novalidate>
+        <div class="field">
+          <label for="title">Title</label>
+          <input id="title" name="title" type="text" required aria-describedby="title-error">
+          <p id="title-error" class="error"></p>
+        </div>
+
+        <div class="field">
+          <label for="author">Author</label>
+          <input id="author" name="author" type="text">
+        </div>
+
+        <div class="field">
+          <label for="pages">Pages</label>
+          <input id="pages" name="pages" type="number" required min="1" aria-describedby="pages-error">
+          <p id="pages-error" class="error"></p>
+        </div>
+
+        <div class="field">
+          <label for="status">Status</label>
+          <select id="status" name="status">
+            <option value="want-to-read">Want to read</option>
+            <option value="reading">Reading</option>
+            <option value="finished">Finished</option>
+          </select>
+        </div>
+
+        <button type="submit">Add book</button>
+      </form>
+    </section>
+
+    <section aria-labelledby="list-heading">
+      <h2 id="list-heading">My books</h2>
+      <p id="book-count">No books yet. Add your first one.</p>
+      <ul id="book-list"></ul>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
