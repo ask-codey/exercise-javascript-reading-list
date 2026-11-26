@@ -1,9 +1,9 @@
 // Tests for books.js. Run them with: node --test
-// They call your three functions with books from the Reading List and check what each one returns.
+// They call your five functions with books from the Reading List and check what each one returns.
 // You don't need to change this file.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { validateBook, toStorage, fromStorage } from './books.js';
+import { validateBook, toStorage, fromStorage, toBackup, fromBackup } from './books.js';
 
 const titleMessage = 'Every book needs a title.';
 const pagesMessage = 'Pages must be a whole number, 1 or more.';
@@ -64,4 +64,28 @@ test('fromStorage: JSON that is not a list gives an empty list', () => {
   assert.deepEqual(fromStorage('{"title":"Dune"}'), [], 'One book on its own is not a list of books.');
   assert.deepEqual(fromStorage('42'), [], 'A number is not a list of books.');
   assert.deepEqual(fromStorage('null'), [], 'The text null is not a list of books.');
+});
+
+test('toBackup: a backup is JSON a person can read, each property on its own line', () => {
+  assert.equal(toBackup([{ title: 'Dune', pages: 412 }]), '[\n  {\n    "title": "Dune",\n    "pages": 412\n  }\n]',
+    'One book backs up as JSON indented by 2 spaces, with each property on its own line.');
+});
+
+test('fromBackup: reads back exactly what toBackup saved', () => {
+  const books = [dune, emma, hobbit];
+  assert.deepEqual(fromBackup(toBackup(books)), books,
+    'Three books backed up come back as three books, every field the same.');
+  assert.deepEqual(fromBackup('[]'), [], 'A backup of an empty list gives an empty list.');
+});
+
+test("fromBackup: text that isn't JSON is not a backup", () => {
+  assert.equal(fromBackup('Milk, eggs, bread'), null,
+    "A shopping list isn't a backup: return null, so the page keeps the books it has.");
+  assert.equal(fromBackup(''), null, 'An empty file is not a backup: null.');
+});
+
+test('fromBackup: JSON that is not a list of books is not a backup', () => {
+  assert.equal(fromBackup('{"title":"Dune"}'), null, 'One book on its own is not a list of books: null.');
+  assert.equal(fromBackup('42'), null, 'A number is not a list of books: null.');
+  assert.equal(fromBackup('[{"pages":3}]'), null, 'A book with no title is not one of ours: null.');
 });

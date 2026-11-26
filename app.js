@@ -1,7 +1,7 @@
 // Connects the Reading List page to the functions in books.js.
-// renderBooks is ready to use. The four TODOs are for you to finish: the checklist in README.md says
+// renderBooks is ready to use. The five TODOs are for you to finish: the checklist in README.md says
 // what the page should do when they're done.
-import { validateBook, toStorage, fromStorage } from './books.js';
+import { validateBook, toStorage, fromStorage, toBackup, fromBackup } from './books.js';
 
 const storageKey = 'reading-list';
 
@@ -61,3 +61,13 @@ form.addEventListener('submit', (event) => {
   // Otherwise add the book to the list, save the list with localStorage.setItem and toStorage,
   // draw the list again, empty the form with form.reset(), and put the cursor back in the title box.
 });
+
+// TODO 5: back up the list and open a backup, with the controls under it.
+// Save a backup: make a Blob of toBackup(books), give it an address with URL.createObjectURL, and click a link
+// whose download is 'reading-list.json'.
+// Open a backup: when a file is chosen in backupFile, read its text with a FileReader. If fromBackup gives a list,
+// it becomes books: save it, draw it, and show 'Opened ' and the file's name in backupMessage. If it gives null,
+// keep the books and show "That file isn't a reading list backup."
+const saveButton = document.getElementById('save-backup');
+const backupFile = document.getElementById('backup-file');
+const backupMessage = document.getElementById('backup-message');

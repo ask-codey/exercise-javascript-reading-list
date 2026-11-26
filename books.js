@@ -1,4 +1,4 @@
-// The Reading List's rules: three functions for you to finish.
+// The Reading List's rules: five functions for you to finish.
 // None of them touches the page, so the tests can check them with Node. app.js uses them on the page.
 //
 // A book is an object like this one. Its pages are already a number: app.js converts them.
@@ -41,4 +41,32 @@ export function toStorage(books) {
 //    fromStorage('[{title: Dune') -> []
 export function fromStorage(saved) {
   return null;
+}
+
+// 4. toBackup(books)
+//    Return the text for a backup file of this list: JSON with each book's properties on their own lines,
+//    indented by 2 spaces, so the file is easy to read if someone opens it. fromBackup turns it back into the list.
+//    toBackup([{ title: 'Dune', pages: 412 }]) ->
+//      [
+//        {
+//          "title": "Dune",
+//          "pages": 412
+//        }
+//      ]
+export function toBackup(books) {
+  return '';
+}
+
+// 5. fromBackup(text)
+//    text is what a backup file holds. Return the list of books in it, or null when it isn't a backup, so the
+//    page can keep the list it has instead of losing it (unlike fromStorage, which starts an empty list).
+//    - Text that isn't JSON, such as 'Milk, eggs, bread': null.
+//    - JSON that isn't an array, such as '{"title":"Dune"}' or '42': null.
+//    - An array with a book whose title isn't a string, such as '[{"pages":3}]': null.
+//    - '[]' is a backup of an empty list: [].
+//
+//    fromBackup(toBackup(books)) -> an array equal to books
+//    fromBackup('Milk, eggs, bread') -> null
+export function fromBackup(text) {
+  return [];
 }

@@ -2,7 +2,7 @@
 
 Exercise code for the lesson **Exercise: Reading List** in JavaScript in Depth on [ask-codey.com](https://www.ask-codey.com).
 
-My Reading List is a page where a reader keeps track of books: the ones they want to read, the one they're reading, and the ones they've finished. The page and its look are done. You'll write the JavaScript that makes it work: it reads the add-book form, refuses a book with no title or with 0 pages (with a message next to the field), adds the book to the list, and remembers the list between visits with localStorage.
+My Reading List is a page where a reader keeps track of books: the ones they want to read, the one they're reading, and the ones they've finished. The page and its look are done. You'll write the JavaScript that makes it work: it reads the add-book form, refuses a book with no title or with 0 pages (with a message next to the field), adds the book to the list, remembers the list between visits with localStorage, and saves and opens a backup file so the list can move to another computer.
 
 ## Before you start
 
@@ -11,8 +11,8 @@ You need Node.js 24 or later (in a terminal, `node --version` should print `v24`
 ## What's here
 
 - `index.html`, `styles.css`: the page and its look. Ready to use.
-- `books.js`: three functions that check a book and turn the list into text and back, with no page involved. Each one gives back `null` or `''` for now. The comment above each one says what it should give back, with examples. For you to finish.
-- `app.js`: connects the page to those functions. It already draws the list (`renderBooks`). Its four TODO comments are for you to finish.
+- `books.js`: five functions that check a book and turn the list into text and back, for localStorage and for a backup file, with no page involved. Each one gives back a placeholder (`null`, `''` or `[]`) for now. The comment above each one says what it should give back, with examples. For you to finish.
+- `app.js`: connects the page to those functions. It already draws the list (`renderBooks`). Its five TODO comments are for you to finish.
 - `books.test.js`: tests that call the functions in `books.js`. You don't need to change this file.
 - `package.json`: tells Node that these files use `import` and `export`. Ready to use.
 
@@ -43,6 +43,9 @@ Open the folder in VS Code, then open a terminal there (**Terminal > New Termina
 - [ ] In the developer tools, **Application** (or **Storage** in Firefox) > **Local storage** shows one key, `reading-list`, holding the list as JSON text.
 - [ ] Delete that key in the developer tools and reload: the page starts empty, with *No books yet. Add your first one.*, and no error in the Console.
 - [ ] Change that key's value to some broken text, such as `[{oops`, and reload: the page starts empty, with no error in the Console.
+- [ ] With two books on the list, **Save a backup** downloads `reading-list.json`. Open it in a text editor: it holds both books as JSON, each property on its own line.
+- [ ] Delete the `reading-list` key in the developer tools and reload, so the list is empty. **Open a backup** with that file: both books are back, *Opened reading-list.json* shows under it, and after a reload they're still there.
+- [ ] **Open a backup** with a file that isn't one, such as a photo or a text file: the list stays as it was, and *That file isn't a reading list backup.* shows under it.
 
 ## Tips
 
@@ -50,6 +53,7 @@ Open the folder in VS Code, then open a terminal there (**Terminal > New Termina
 - `validateBook` gives back an object such as `{ title: 'Every book needs a title.' }`. `errors.title` is the title's message, or `undefined` when the title is fine; `errors.title ?? ''` turns that into a message to show or an empty one.
 - `form.elements.title` finds the Title box by its name, and `document.getElementById('title-error')` its message paragraph.
 - `form.reset()` puts every field back the way the page started.
+- For the backup, *Opening and Saving Files in the Browser* shows the Blob, the object URL, the download link and the FileReader. `fromBackup` gives `null` for a file that isn't a backup: then keep `books` as it is.
 - Stuck on a test? Read its message, then the comment above the function: the examples there are the tests' examples.
 
 ## Want more?

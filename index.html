@@ -48,6 +48,18 @@
       <p id="book-count">No books yet. Add your first one.</p>
       <ul id="book-list"></ul>
     </section>
+
+    <section aria-labelledby="backup-heading">
+      <h2 id="backup-heading">Back up your list</h2>
+      <div class="field">
+        <button id="save-backup" type="button">Save a backup</button>
+      </div>
+      <div class="field">
+        <label for="backup-file">Open a backup</label>
+        <input id="backup-file" name="backup-file" type="file" accept=".json">
+      </div>
+      <p id="backup-message" role="status"></p>
+    </section>
   </main>
 
   <script type="module" src="app.js"></script>
